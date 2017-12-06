@@ -53,7 +53,7 @@ import { Subject } from "rxjs/Subject";
 var MyService = /** @class */ (function () {
     function MyService() {
         this.observable = this.subject.asObservable();
-        if (this.someValue >= 3) {
+        if (this.someValue === 1) {
             this.constructValue = 5;
         }
     }
@@ -64,7 +64,7 @@ var MyService = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        return (this.constructValue > 0);
+        return (this.constructValue === 5);
     };
     return MyService;
 }());
