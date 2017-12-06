@@ -70,7 +70,7 @@ var MyService = /** @class */ (function () {
 }());
 ```
 
-Note that 2 member variables, `this.subject` and `this.someValue` are initialized at declaration in the ource typescript,
+Note that 2 member variables, `this.subject` and `this.someValue` are initialized at declaration in the source typescript,
 but those initializations are stripped entirely in the compiled output javascript. Because of that, the compiled class will not work as it is written. 
 
 The first line in the constructor will cause an error. 
@@ -90,5 +90,5 @@ $ npm run build
 
 The build command will execute `ngc` to compile the source code. After the build is complete,
 you can inspect the output in the `build/` folder, specifically the `build/my.service.js` file,
-to see that it's compiled output is not correct.
+to see that it's compiled output is as described above.
 
