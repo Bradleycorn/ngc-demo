@@ -1,0 +1,23 @@
+# Node generated files
+node_modules
+npm-debug.log
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# IDE directorys
+.vscode
+.idea
+
+# Ignored files
+*.map
+*.tgz
+debug.log
+src/**/*.js
+src/**/*.css
+!src/**/rollup.config.js
+
+#compiled directories
+build
+dist

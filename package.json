@@ -1,0 +1,31 @@
+{
+  "name": "ngc-demo",
+  "version": "1.0.0",
+  "description": "Demo ngc stripping useful code.",
+  "author": "Brad Ball",
+  "repository": {},
+  "engines": {
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "clean": "rimraf build dist/*  \"src/**/*.js\" \"src/**/*.map\" \"src/**/*.d.ts\"",
+    "prebuild": "npm run clean",
+    "build": "ngc"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.0.5",
+    "@angular/compiler": "5.0.5",
+    "@angular/compiler-cli": "5.0.5",
+    "@angular/core": "^5.0.5",
+    "@angular/platform-browser": "^5.0.5",
+    "@angular/platform-browser-dynamic": "^5.0.5",
+    "@types/node": "^6.0.89",
+    "rimraf": "^2.6.1",
+    "rxjs": "5.5.2",
+    "tslint": "^5.0.0",
+    "typescript": "2.5.3",
+    "util": "^0.10.3",
+    "zone.js": "^0.8.5"
+  }
+}
