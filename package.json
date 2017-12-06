@@ -10,8 +10,8 @@
   },
   "scripts": {
     "clean": "rimraf build dist/*  \"src/**/*.js\" \"src/**/*.map\" \"src/**/*.d.ts\"",
-    "prebuild": "npm run clean",
-    "build": "ngc"
+    "build:ng": "npm run clean && ngc",
+    "build:ts": "npm run clean && tsc"
   },
   "devDependencies": {
     "@angular/common": "^5.0.5",

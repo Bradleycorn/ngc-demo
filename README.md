@@ -2,6 +2,31 @@
 
 In the latest versions (v5.0.4 & v5.0.5) of the angular compiler (ngc), the compiler strips out class member variable initializations, resulting in code that at best doesn't work as it should, and at worst is completely broken and causes errors in the browser. 
 
+## Running the demo to examine the problem
+
+Running the demo is easy. clone the repo, then:
+```
+$ npm install
+```
+
+To compile with the angular compiler and see the (non-working) ngc output:
+```
+$ npm run build:ng
+```
+
+To compile with the typescript compiler and see the (working) tsc output:
+```
+$ npm run build:ts
+```
+
+To compare the source and output:
+The MyService source file is at `src/my.service.ts`
+And the compiled javascript is at `build/my.service.js`
+
+The build commands will execute `ngc` or `tsc` to compile the source code. After the build is complete,
+you can inspect the output in the `build/` folder, specifically the `build/my.service.js` file,
+to see it's compiled output.
+
 ## What is the problem?
 
 Consider the `src/my.service.ts` Angular Service class contained in this repo:
@@ -80,15 +105,37 @@ not set, and thus `this.constructValue` will not get set to `5`. As a result,
 calls to the class's `isWorking` method will return `false`, though the way the 
 code is written, it should return `true`. 
 
-## Running the demo to examine the problem
-
-Running the demo is easy. clone the repo, then:
+Contrast that with the javascript that is output when compiling with the `tsc` typescript compiler:
 ```
-$ npm install
-$ npm run build
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+var MyService = /** @class */ (function () {
+    function MyService() {
+        this.subject = new Subject();
+        this.someValue = 1;
+        this.observable = this.subject.asObservable();
+        if (this.someValue === 1) {
+            this.constructValue = 5;
+        }
+    }
+
+    MyService.prototype.isWorking = function () {
+        return (this.constructValue === 5);
+    };
+    MyService = __decorate([
+        Injectable()
+    ], MyService);
+    return MyService;
+}());
+export { MyService };
 ```
 
-The build command will execute `ngc` to compile the source code. After the build is complete,
-you can inspect the output in the `build/` folder, specifically the `build/my.service.js` file,
-to see that it's compiled output is as described above.
+Note that with the typescript compiler, the initializations are maintained, and moved into the constructor
+and the code works as expected.
+```
+    function MyService() {
+        this.subject = new Subject();
+        this.someValue = 1;
 
+        ...
+```        
